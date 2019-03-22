@@ -104,9 +104,9 @@ class Editor extends Component {
                                 </label>
                             </div>
                             <div className="Form__buttons">
-                                    <Link to="/">
-                                        <button className="Button Save__button" onClick={()=>this.props.getNewData(this.state)}>Save</button>
-                                    </Link>
+                                    {/* <Link to="/"> */}
+                                        <button className="Button Save__button" onClick={()=>this.props.getNewData(this.state)} type="button">Save</button>
+                                    {/* </Link> */}
                                     <Link to="/">
                                         <button className="Button Cancel__button">Cancel</button>
                                     </Link>

@@ -4,6 +4,9 @@ import Happy from './images/happy.png';
 import Sad from './images/sad.png';
 
 class Home extends Component {
+    componentDidMount(){
+        this.props.isDataSaved();
+    }
     isHappyOrSad(mood){
         return(
             mood==="happy" ? <img src={Happy} alt="Mood happy" className="Mood__card-img"/> : <img src={Sad} alt="Mood sad" className="Mood__card-img"/>
