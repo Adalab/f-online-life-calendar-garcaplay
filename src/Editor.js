@@ -17,6 +17,7 @@ class Editor extends Component {
         this.messageInput = React.createRef();
         this.updateDate = this.updateDate.bind(this);
         this.updateMood = this.updateMood.bind(this);
+        this.updateMessage = this.updateMessage.bind(this);
     }
 
     updateDate(e){
@@ -54,6 +55,15 @@ class Editor extends Component {
         
     }
 
+    updateMessage(e){
+        let value= e.currentTarget.value;
+        let copyOfCalendar = this.state.calendar;
+        copyOfCalendar[0].message = value;
+        this.setState({
+            calendar: copyOfCalendar
+        })
+    }
+
     disableCheck(selected){
         const elements = Array.prototype.slice.call(document.getElementsByName('Status__checkbox'));
         elements.map(element =>{
@@ -66,7 +76,7 @@ class Editor extends Component {
     showMessageInput(){
         this.messageInput.current.classList.remove("Hidden");
     }
-    
+
     hideMessageInput(){
         this.messageInput.current.classList.add("Hidden");
     }
@@ -89,9 +99,8 @@ class Editor extends Component {
                                     <input type="checkbox" name="Status__checkbox" className="Status" id="Status__sad" value={this.state.calendar[0].mood} onChange={this.updateMood}/>:(
                                 </label>
                                 <label className="Message Hidden" ref={this.messageInput}>
-                                    {/* This will only appear if the happy checkbox is selected, must include here a ref and in the happycheckbox a function that toggle a hidden class here */}
                                     Message
-                                    <input type="text" className="Message" id="Message" value={this.state.calendar[0].message} onChange={this.updateState}></input>
+                                    <input type="text" className="Message" id="Message" value={this.state.calendar[0].message} onChange={this.updateMessage}></input>
                                 </label>
                             </div>
                             <div className="Form__buttons">
