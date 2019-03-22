@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 class Editor extends Component {
   render() {
@@ -25,8 +26,12 @@ class Editor extends Component {
                             </label>
                         </div>
                         <div className="Form__buttons">
-                            <button className="Button Save__button">Save</button>
-                            <button className="Button Cancel__button">Cancel</button>
+                                <Link to="/">
+                                    <button className="Button Save__button">Save</button>
+                                </Link>
+                                <Link to="/">
+                                    <button className="Button Cancel__button">Cancel</button>
+                                </Link>
                         </div>
                     </form>
                 </div>

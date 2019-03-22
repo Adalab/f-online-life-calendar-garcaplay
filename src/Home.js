@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 class Home extends Component {
   render() {
@@ -6,7 +7,9 @@ class Home extends Component {
       <div className="Home">
         <header>
           <div className="Header Home__header">
-            <button className="Button Home__header-button">+</button>
+            <Link to="/editor">
+                <button className="Button Home__header-button">+</button>
+            </Link>
           </div>
         </header>
         <main>
