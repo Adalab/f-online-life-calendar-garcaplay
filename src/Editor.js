@@ -82,7 +82,6 @@ class Editor extends Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className="Editor">
                 <main>
@@ -104,12 +103,10 @@ class Editor extends Component {
                                 </label>
                             </div>
                             <div className="Form__buttons">
-                                    {/* <Link to="/"> */}
-                                        <button className="Button Save__button" onClick={()=>this.props.getNewData(this.state)} type="button">Save</button>
-                                    {/* </Link> */}
-                                    <Link to="/">
-                                        <button className="Button Cancel__button">Cancel</button>
-                                    </Link>
+                                <button className="Button Save__button" onClick={()=>this.props.getNewData(this.state)} type="button">Save</button>
+                                <Link to="/">
+                                    <button className="Button Cancel__button">Cancel</button>
+                                </Link>
                             </div>
                         </form>
                     </div>

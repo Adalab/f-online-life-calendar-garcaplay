@@ -26,6 +26,7 @@ class App extends Component {
         this.saveDataOnLocal = this.saveDataOnLocal.bind(this);
         this.returnToHome = this.returnToHome.bind(this);
     }
+
     componentDidMount(){
         this.isDataSaved();
     }
@@ -59,9 +60,7 @@ class App extends Component {
     }
 
     returnToHome(){
-        
         history.push('/');
-        
     }
 
     render() {
