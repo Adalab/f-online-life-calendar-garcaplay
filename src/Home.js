@@ -9,9 +9,37 @@ class Home extends Component {
             mood==="happy" ? <img src={Happy} alt="Mood happy" className="Mood__card-img"/> : <img src={Sad} alt="Mood sad" className="Mood__card-img"/>
         )      
     }
-  render() {
-      const {state} = this.props;
-      const calendar = state.calendar;
+    isNewUserOrNot(){
+        console.log(this.props.state.noData);
+        if(this.props.state.noData !== ""){
+            return(
+                <p>{this.props.state.noData}</p>
+            )
+        } else{
+            const {state} = this.props;
+            const calendar = state.calendar;
+            return(
+                
+                <div className="Main Home__main">
+                    <ul className="Mood__list">
+                        {calendar.map((day, index)=>{
+                            return(
+                                <li className="Mood__list-item" key={index}>
+                                    <div className="Mood__card">
+                                        <p className="Mood__card-day">{day.date}</p>
+                                        {this.isHappyOrSad(day.mood)}
+                                    </div>
+                                </li>
+                            )
+                        })}
+                    
+                    </ul>
+                </div>
+                
+            ) 
+        }
+    }
+  render() {  
     return (
       <div className="Home">
         <header>
@@ -22,21 +50,7 @@ class Home extends Component {
           </div>
         </header>
         <main>
-          <div className="Main Home__main">
-            <ul className="Mood__list">
-                {calendar.map((day, index)=>{
-                    return(
-                        <li className="Mood__list-item" key={index}>
-                            <div className="Mood__card">
-                                <p className="Mood__card-day">{day.date}</p>
-                                {this.isHappyOrSad(day.mood)}
-                            </div>
-                        </li>
-                    )
-                })}
-              
-            </ul>
-          </div>
+            {this.isNewUserOrNot()}
         </main>
       </div>
     );
