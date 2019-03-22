@@ -27,7 +27,8 @@ class App extends Component {
         if(localStorage.getItem('savedMoods') !== null){
             const savedMoods = JSON.parse(localStorage.getItem('savedMoods'));
             this.setState({
-                calendar: savedMoods
+                calendar: savedMoods,
+                noData: ""
             })
         } else {
             this.setState({
@@ -36,7 +37,7 @@ class App extends Component {
         }
     }
 
-    getNewData(){
+    getNewData(data){
 
     }
 

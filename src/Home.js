@@ -10,7 +10,6 @@ class Home extends Component {
         )      
     }
     isNewUserOrNot(){
-        console.log(this.props.state.noData);
         if(this.props.state.noData !== ""){
             return(
                 <p>{this.props.state.noData}</p>
