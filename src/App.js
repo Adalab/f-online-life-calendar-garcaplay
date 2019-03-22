@@ -18,6 +18,7 @@ class App extends Component {
             // ],
             noData: ""
         }
+        this.getNewData = this.getNewData.bind(this);
     }
     componentDidMount(){
         this.isDataSaved();
@@ -38,7 +39,10 @@ class App extends Component {
     }
 
     getNewData(data){
-
+        let value = data.calendar[0];
+        this.setState({
+            calendar: [...this.state.calendar, value]
+        })
     }
 
     saveDataOnLocal(data, dataName){
