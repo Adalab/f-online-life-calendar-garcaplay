@@ -14,6 +14,7 @@ class Editor extends Component {
                     }
                 ],
         }
+        this.messageInput = React.createRef();
         this.updateDate = this.updateDate.bind(this);
         this.updateMood = this.updateMood.bind(this);
     }
@@ -34,6 +35,7 @@ class Editor extends Component {
         if(e.currentTarget.id === "Status__happy"){
             value = "happy";
             copyOfCalendar[0].mood = value;
+            this.showMessageInput();
             return(
                 this.setState({
                     calendar: copyOfCalendar
@@ -42,6 +44,7 @@ class Editor extends Component {
         } else {
             value = "sad";
             copyOfCalendar[0].mood = value;
+            this.hideMessageInput();
             return(
                 this.setState({
                     calendar: copyOfCalendar
@@ -60,6 +63,14 @@ class Editor extends Component {
         });
     }
 
+    showMessageInput(){
+        this.messageInput.current.classList.remove("Hidden");
+    }
+    
+    hideMessageInput(){
+        this.messageInput.current.classList.add("Hidden");
+    }
+
     render() {
         console.log(this.state);
         return (
@@ -74,11 +85,10 @@ class Editor extends Component {
                                 </label>
                                 <label className="Status">
                                     How do you feel today?
-                                    {/* Insert a onClick function to only be able to select one or change to radio type*/}
                                     <input type="checkbox" name="Status__checkbox" className="Status" id="Status__happy" value={this.state.calendar[0].mood} onChange={this.updateMood}/>:)
                                     <input type="checkbox" name="Status__checkbox" className="Status" id="Status__sad" value={this.state.calendar[0].mood} onChange={this.updateMood}/>:(
                                 </label>
-                                <label className="Message">
+                                <label className="Message Hidden" ref={this.messageInput}>
                                     {/* This will only appear if the happy checkbox is selected, must include here a ref and in the happycheckbox a function that toggle a hidden class here */}
                                     Message
                                     <input type="text" className="Message" id="Message" value={this.state.calendar[0].message} onChange={this.updateState}></input>
