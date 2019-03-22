@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import Happy from './images/happy.png';
+import Sad from './images/sad.png';
 
 class Home extends Component {
+    isHappyOrSad(mood){
+        return(
+            mood==="happy" ? <img src={Happy} alt="Mood happy" className="Mood__card-img"/> : <img src={Sad} alt="Mood sad" className="Mood__card-img"/>
+        )      
+    }
   render() {
+      const {state} = this.props;
+      const calendar = state.calendar;
     return (
       <div className="Home">
         <header>
@@ -15,11 +24,17 @@ class Home extends Component {
         <main>
           <div className="Main Home__main">
             <ul className="Mood__list">
-              <li className="Mood__list-item">
-                <div className="Mood__card">
-                  <img src="" alt="Mood" className="Mood__card-img"/>
-                </div>
-              </li>
+                {calendar.map((day, index)=>{
+                    return(
+                        <li className="Mood__list-item" key={index}>
+                            <div className="Mood__card">
+                                <p className="Mood__card-day">{day.date}</p>
+                                {this.isHappyOrSad(day.mood)}
+                            </div>
+                        </li>
+                    )
+                })}
+              
             </ul>
           </div>
         </main>

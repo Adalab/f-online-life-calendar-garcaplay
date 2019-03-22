@@ -5,12 +5,23 @@ import Home from './Home';
 import Editor from './Editor';
 
 class App extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            calendar: [
+                {
+                    date: "24/09/19",
+                    mood: "sad"
+                }
+            ]
+        }
+    }
     render() {
         return (
             <div className="App">
                 <Switch>
-                    <Route exact path="/" component={Home}></Route>
-                    <Route path="/editor" component={Editor}></Route>
+                    <Route exact path="/" render={props => (<Home match={props.match} state={this.state}/>)}></Route>
+                    <Route path="/editor" render={props => (<Editor match={props.match} state={this.state}/>)}></Route>
                 </Switch>
             </div>
         );
