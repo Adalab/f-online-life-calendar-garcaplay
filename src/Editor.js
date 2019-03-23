@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 class Editor extends Component {
     constructor(props){
@@ -13,6 +15,7 @@ class Editor extends Component {
                         message: ""
                     }
                 ],
+            startDate: new Date()
         }
         this.messageInput = React.createRef();
         this.updateDate = this.updateDate.bind(this);
@@ -20,12 +23,14 @@ class Editor extends Component {
         this.updateMessage = this.updateMessage.bind(this);
     }
 
-    updateDate(e){
-        const value = e.currentTarget.value;
+    updateDate(date){
+        console.log(date);
+        const value = date;
         let copyOfCalendar = this.state.calendar;
         copyOfCalendar[0].date = value;
         this.setState({
-            calendar: copyOfCalendar
+            calendar: copyOfCalendar,
+            startDate: value,
         })
     }
 
@@ -90,7 +95,12 @@ class Editor extends Component {
                             <div className="Form__sections">
                                 <label className="Date">
                                     Date
-                                    <input type="text" className="Date" id="Date" value={this.state.calendar[0].date} placeholder="16/04/19" required onChange={this.updateDate}></input>
+                                    <DatePicker 
+                                        selected={this.state.startDate}
+                                        onChange={this.updateDate}
+                                        dateFormat="d/MM/yyyy"
+                                    />
+                                    {/* <input type="text" className="Date" id="Date" value={this.state.calendar[0].date} placeholder="16/04/19" required onChange={this.updateDate}></input> */}
                                 </label>
                                 <label className="Status">
                                     How do you feel today?

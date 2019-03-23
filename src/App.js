@@ -45,11 +45,44 @@ class App extends Component {
         }
     }
 
+    
+
+    //Keep on this
+    orderArray(array){
+        console.log(array)
+        let orderedArray = [];
+        array.sort(function(a,b){
+            console.log('aquí estoy', array, a, b);
+            console.log(a.date)
+            console.log(b.date)
+            orderedArray = new Date(a.date) - new Date(b.date);
+            console.log(orderedArray)
+            return(orderedArray)
+        }, ()=>this.transformDate(orderedArray));
+        
+    }
+
+    transformDate(array){
+        console.log('vamos que nos vamos')
+        let newArray = array.map(item =>{
+            const selectedDay = item.date.getDate();
+            const selectedMonth = item.date.getMonth() + 1; // Months start in 0
+            const selectedYear = item.date.getFullYear();
+            let dateTransformed = item;
+            dateTransformed.date = selectedDay+'/'+selectedMonth+'/'+selectedYear;
+            return(dateTransformed)
+        })
+        
+        console.log(newArray)
+    }
+
     getNewData(data){
         let value = data.calendar[0];
         this.setState({
             calendar: [...this.state.calendar, value]
-        }, ()=>this.saveDataOnLocal(this.state.calendar, 'savedMoods'))
+        }, ()=> this.orderArray(this.state.calendar));
+        //()=>this.saveDataOnLocal(this.state.calendar, 'savedMoods'))
+        
         
     }
 

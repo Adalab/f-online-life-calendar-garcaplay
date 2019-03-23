@@ -7,11 +7,13 @@ class Home extends Component {
     componentDidMount(){
         this.props.isDataSaved();
     }
+    
     isHappyOrSad(mood){
         return(
             mood==="happy" ? <img src={Happy} alt="Mood happy" className="Mood__card-img"/> : <img src={Sad} alt="Mood sad" className="Mood__card-img"/>
         )      
     }
+    
     isNewUserOrNot(){
         if(this.props.state.noData !== ""){
             return(
@@ -30,6 +32,7 @@ class Home extends Component {
                                     <div className="Mood__card">
                                         <p className="Mood__card-day">{day.date}</p>
                                         {this.isHappyOrSad(day.mood)}
+                                        <p className="Mood_card-message">{day.message}</p>
                                     </div>
                                 </li>
                             )
