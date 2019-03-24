@@ -42,6 +42,7 @@ class Editor extends Component {
         let copyOfCalendar = this.state.secondCalendar;
         copyOfCalendar[0].date = value;
         this.setState({
+            startDate: date,
             secondCalendar: copyOfCalendar
         })
     }
@@ -109,7 +110,7 @@ class Editor extends Component {
                                     Date
                                     <DatePicker 
                                         selected={this.state.startDate}
-                                        onChange={this.transformDate}
+                                        onChange={this.updateDate}
                                         dateFormat="d/MM/yyyy"
                                     />
                                     {/* <input type="text" className="Date" id="Date" value={this.state.calendar[0].date} placeholder="16/04/19" required onChange={this.updateDate}></input> */}

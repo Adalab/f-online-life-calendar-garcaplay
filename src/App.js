@@ -57,8 +57,8 @@ class App extends Component {
             console.log('aquí estoy', array, a, b);
             console.log(a.date)
             console.log(b.date)
-            // orderedArray = new Date(a.date) - new Date(b.date);
-            orderedArray = a.date - b.date;
+            orderedArray = new Date(a.date) - new Date(b.date);
+            // orderedArray = a.date - b.date;
             console.log(orderedArray)
             return(orderedArray)
         // }, ()=>this.transformDate(orderedArray));
@@ -67,13 +67,13 @@ class App extends Component {
     }
 
     getNewData(data){
-        console.log('getNewData en ', this.state.calendar)
-        console.log(data)
+        // console.log('getNewData en ', this.state.calendar)
+        // console.log(data)
         let value = data;
         let copyOfStateCalendar = this.state.calendar;
-        console.log('copyOfStateCalendar = ' + copyOfStateCalendar)
+        // console.log('copyOfStateCalendar = ' + copyOfStateCalendar)
         copyOfStateCalendar.push(value);
-        console.log('copyOfStateCalendar = ' + copyOfStateCalendar)
+        // console.log('copyOfStateCalendar = ' + copyOfStateCalendar)
         // SI SEGUIMOS EN ESTA LINEA NO HACE FALTA GUARDARLO EN EL ESTADO
         // PASAR A TRANSFORMDATE
         this.setState({
