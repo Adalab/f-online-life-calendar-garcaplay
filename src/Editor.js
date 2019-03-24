@@ -5,7 +5,7 @@ class Editor extends Component {
     constructor(props){
         super(props);
         this.state = {
-            calendar: 
+            secondCalendar: 
                 [
                     {
                         date: "",
@@ -22,16 +22,16 @@ class Editor extends Component {
 
     updateDate(e){
         const value = e.currentTarget.value;
-        let copyOfCalendar = this.state.calendar;
+        let copyOfCalendar = this.state.secondCalendar;
         copyOfCalendar[0].date = value;
         this.setState({
-            calendar: copyOfCalendar
+            secondCalendar: copyOfCalendar
         })
     }
 
     updateMood(e){
         let value = "";
-        let copyOfCalendar = this.state.calendar;
+        let copyOfCalendar = this.state.secondCalendar;
         this.disableCheck(e.currentTarget);
         if(e.currentTarget.id === "Status__happy"){
             value = "happy";
@@ -39,7 +39,7 @@ class Editor extends Component {
             this.showMessageInput();
             return(
                 this.setState({
-                    calendar: copyOfCalendar
+                    secondCalendar: copyOfCalendar
                 })
             )
         } else {
@@ -48,7 +48,7 @@ class Editor extends Component {
             this.hideMessageInput();
             return(
                 this.setState({
-                    calendar: copyOfCalendar
+                    secondCalendar: copyOfCalendar
                 })
             )
         }
@@ -57,10 +57,10 @@ class Editor extends Component {
 
     updateMessage(e){
         let value= e.currentTarget.value;
-        let copyOfCalendar = this.state.calendar;
+        let copyOfCalendar = this.state.secondCalendar;
         copyOfCalendar[0].message = value;
         this.setState({
-            calendar: copyOfCalendar
+            secondCalendar: copyOfCalendar
         })
     }
 
@@ -90,16 +90,16 @@ class Editor extends Component {
                             <div className="Form__sections">
                                 <label className="Date">
                                     Date
-                                    <input type="text" className="Date" id="Date" value={this.state.calendar[0].date} placeholder="16/04/19" required onChange={this.updateDate}></input>
+                                    <input type="text" className="Date" id="Date" value={this.state.secondCalendar[0].date} placeholder="16/04/19" required onChange={this.updateDate}></input>
                                 </label>
                                 <label className="Status">
                                     How do you feel today?
-                                    <input type="checkbox" name="Status__checkbox" className="Status" id="Status__happy" value={this.state.calendar[0].mood} onChange={this.updateMood}/>:)
-                                    <input type="checkbox" name="Status__checkbox" className="Status" id="Status__sad" value={this.state.calendar[0].mood} onChange={this.updateMood}/>:(
+                                    <input type="checkbox" name="Status__checkbox" className="Status" id="Status__happy" value={this.state.secondCalendar[0].mood} onChange={this.updateMood}/>:)
+                                    <input type="checkbox" name="Status__checkbox" className="Status" id="Status__sad" value={this.state.secondCalendar[0].mood} onChange={this.updateMood}/>:(
                                 </label>
                                 <label className="Message Hidden" ref={this.messageInput}>
                                     Message
-                                    <input type="text" className="Message" id="Message" value={this.state.calendar[0].message} onChange={this.updateMessage}></input>
+                                    <input type="text" className="Message" id="Message" value={this.state.secondCalendar[0].message} onChange={this.updateMessage}></input>
                                 </label>
                             </div>
                             <div className="Form__buttons">

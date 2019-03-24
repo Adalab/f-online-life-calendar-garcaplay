@@ -46,10 +46,34 @@ class App extends Component {
     }
 
     getNewData(data){
-        let value = data.calendar[0];
+        let value = data.secondCalendar[0];
         this.setState({
             calendar: [...this.state.calendar, value]
-        }, ()=>this.saveDataOnLocal(this.state.calendar, 'savedMoods'))
+        }, ()=>this.orderArray(this.state.calendar))
+        //()=>this.saveDataOnLocal(this.state.calendar, 'savedMoods'))
+        
+    }
+
+    orderArray(array){
+        console.log('orderArray')
+        console.log(array)
+        let orderedArray = [];
+
+        array.sort(function(a,b) {
+            console.log('array sort', array, a, b);
+            console.log(a.date + ' ' + b.date)
+            
+            let dateA = new Date(a.date.split("/"));
+            let dateB = new Date(b.date.split("/"));
+            console.log(dateA + ' ' + dateB)
+            
+            // orderedArray = new Date(a.date) - new Date(b.date);
+            return new Date(b.date) - new Date(a.date)
+        // }, ()=>this.transformDate(orderedArray));
+        // }, ()=>this.saveDataOnLocal(orderedArray, 'savedMoods'));
+        });
+        console.log(array);
+        this.saveDataOnLocal(array, 'savedMoods');
         
     }
 
