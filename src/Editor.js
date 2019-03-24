@@ -7,7 +7,7 @@ class Editor extends Component {
     constructor(props){
         super(props);
         this.state = {
-            calendar: 
+            secondCalendar: 
                 [
                     {
                         date: "",
@@ -18,25 +18,37 @@ class Editor extends Component {
             startDate: new Date()
         }
         this.messageInput = React.createRef();
+        this.transformDate = this.transformDate.bind(this);
         this.updateDate = this.updateDate.bind(this);
         this.updateMood = this.updateMood.bind(this);
         this.updateMessage = this.updateMessage.bind(this);
     }
 
+    transformDate(date){
+        let value = date;
+        console.log(value);
+        const selectedDay = value.getDate();
+        const selectedMonth = value.getMonth() + 1; // Months start in 0
+        const selectedYear = value.getFullYear();
+        value = selectedDay+'-'+selectedMonth+'-'+selectedYear;
+        console.log('transformDate value = ' + value);
+        this.setState({
+            startDate: date,
+        }, ()=>this.updateDate(value));
+    }
+
     updateDate(date){
-        console.log(date);
         const value = date;
-        let copyOfCalendar = this.state.calendar;
+        let copyOfCalendar = this.state.secondCalendar;
         copyOfCalendar[0].date = value;
         this.setState({
-            calendar: copyOfCalendar,
-            startDate: value,
+            secondCalendar: copyOfCalendar
         })
     }
 
     updateMood(e){
         let value = "";
-        let copyOfCalendar = this.state.calendar;
+        let copyOfCalendar = this.state.secondCalendar;
         this.disableCheck(e.currentTarget);
         if(e.currentTarget.id === "Status__happy"){
             value = "happy";
@@ -44,7 +56,7 @@ class Editor extends Component {
             this.showMessageInput();
             return(
                 this.setState({
-                    calendar: copyOfCalendar
+                    secondCalendar: copyOfCalendar
                 })
             )
         } else {
@@ -53,7 +65,7 @@ class Editor extends Component {
             this.hideMessageInput();
             return(
                 this.setState({
-                    calendar: copyOfCalendar
+                    secondCalendar: copyOfCalendar
                 })
             )
         }
@@ -62,10 +74,10 @@ class Editor extends Component {
 
     updateMessage(e){
         let value= e.currentTarget.value;
-        let copyOfCalendar = this.state.calendar;
+        let copyOfCalendar = this.state.secondCalendar;
         copyOfCalendar[0].message = value;
         this.setState({
-            calendar: copyOfCalendar
+            secondCalendar: copyOfCalendar
         })
     }
 
@@ -97,23 +109,23 @@ class Editor extends Component {
                                     Date
                                     <DatePicker 
                                         selected={this.state.startDate}
-                                        onChange={this.updateDate}
+                                        onChange={this.transformDate}
                                         dateFormat="d/MM/yyyy"
                                     />
                                     {/* <input type="text" className="Date" id="Date" value={this.state.calendar[0].date} placeholder="16/04/19" required onChange={this.updateDate}></input> */}
                                 </label>
                                 <label className="Status">
                                     How do you feel today?
-                                    <input type="checkbox" name="Status__checkbox" className="Status" id="Status__happy" value={this.state.calendar[0].mood} onChange={this.updateMood}/>:)
-                                    <input type="checkbox" name="Status__checkbox" className="Status" id="Status__sad" value={this.state.calendar[0].mood} onChange={this.updateMood}/>:(
+                                    <input type="checkbox" name="Status__checkbox" className="Status" id="Status__happy" value={this.state.secondCalendar[0].mood} onChange={this.updateMood}/>:)
+                                    <input type="checkbox" name="Status__checkbox" className="Status" id="Status__sad" value={this.state.secondCalendar[0].mood} onChange={this.updateMood}/>:(
                                 </label>
                                 <label className="Message Hidden" ref={this.messageInput}>
                                     Message
-                                    <input type="text" className="Message" id="Message" value={this.state.calendar[0].message} onChange={this.updateMessage}></input>
+                                    <input type="text" className="Message" id="Message" value={this.state.secondCalendar[0].message} onChange={this.updateMessage}></input>
                                 </label>
                             </div>
                             <div className="Form__buttons">
-                                <button className="Button Save__button" onClick={()=>this.props.getNewData(this.state)} type="button">Save</button>
+                                <button className="Button Save__button" onClick={()=>this.props.getNewData(this.state.secondCalendar[0])} type="button">Save</button>
                                 <Link to="/">
                                     <button className="Button Cancel__button">Cancel</button>
                                 </Link>

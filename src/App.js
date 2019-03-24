@@ -29,6 +29,7 @@ class App extends Component {
 
     componentDidMount(){
         this.isDataSaved();
+        console.log(this.state.calendar, 'al inicio');
     }
 
     isDataSaved(){
@@ -49,39 +50,37 @@ class App extends Component {
 
     //Keep on this
     orderArray(array){
+        console.log('orderArray')
         console.log(array)
         let orderedArray = [];
         array.sort(function(a,b){
             console.log('aquí estoy', array, a, b);
             console.log(a.date)
             console.log(b.date)
-            orderedArray = new Date(a.date) - new Date(b.date);
+            // orderedArray = new Date(a.date) - new Date(b.date);
+            orderedArray = a.date - b.date;
             console.log(orderedArray)
             return(orderedArray)
-        }, ()=>this.transformDate(orderedArray));
+        // }, ()=>this.transformDate(orderedArray));
+        }, ()=>this.saveDataOnLocal(orderedArray, 'savedMoods'));
         
-    }
-
-    transformDate(array){
-        console.log('vamos que nos vamos')
-        let newArray = array.map(item =>{
-            const selectedDay = item.date.getDate();
-            const selectedMonth = item.date.getMonth() + 1; // Months start in 0
-            const selectedYear = item.date.getFullYear();
-            let dateTransformed = item;
-            dateTransformed.date = selectedDay+'/'+selectedMonth+'/'+selectedYear;
-            return(dateTransformed)
-        })
-        
-        console.log(newArray)
     }
 
     getNewData(data){
-        let value = data.calendar[0];
+        console.log('getNewData en ', this.state.calendar)
+        console.log(data)
+        let value = data;
+        let copyOfStateCalendar = this.state.calendar;
+        console.log('copyOfStateCalendar = ' + copyOfStateCalendar)
+        copyOfStateCalendar.push(value);
+        console.log('copyOfStateCalendar = ' + copyOfStateCalendar)
+        // SI SEGUIMOS EN ESTA LINEA NO HACE FALTA GUARDARLO EN EL ESTADO
+        // PASAR A TRANSFORMDATE
         this.setState({
-            calendar: [...this.state.calendar, value]
-        }, ()=> this.orderArray(this.state.calendar));
-        //()=>this.saveDataOnLocal(this.state.calendar, 'savedMoods'))
+            calendar: copyOfStateCalendar
+        }, //()=> this.transformDate(this.state.calendar));
+        ()=> this.orderArray(this.state.calendar));
+        // ()=>this.saveDataOnLocal(this.state.calendar, 'savedMoods'))
         
         
     }
