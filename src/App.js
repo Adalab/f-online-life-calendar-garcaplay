@@ -12,13 +12,6 @@ class App extends Component {
         super(props);
         this.state = {
             calendar: [],
-            // [
-            //     {
-            //         date: "24/09/19",
-            //         mood: "sad",
-            //         message: ""
-            //     }
-            // ],
             noData: ""
         }
         this.isDataSaved = this.isDataSaved.bind(this);
